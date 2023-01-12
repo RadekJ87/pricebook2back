@@ -4,10 +4,12 @@ import mongoose from 'mongoose';
 import authRouter from "./routes/auth.js";
 import productRouter from "./routes/products.js";
 import usersRouter from "./routes/users.js";
+import cors from 'cors'
 
 const app = express();
 dotenv.config();
 
+app.use(cors());
 app.use(express.json());
 
 mongoose
