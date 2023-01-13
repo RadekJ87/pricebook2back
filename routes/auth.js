@@ -44,7 +44,6 @@ authRouter
             const token = jwt.sign({userID: user._doc._id.toString(), admin: user._doc.admin}, process.env.ACCESS_TOKEN, {
                 expiresIn: 60 * 60 * 7
             });
-
             return res.status(200).json({
                 "username": user._doc.username,
                 "profilePic": user._doc.profilePic,
