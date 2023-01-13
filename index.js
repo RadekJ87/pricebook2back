@@ -31,10 +31,6 @@ app
     .use('/api/products', productRouter)
     .use('/api/users', usersRouter);
 
-// app.listen(4000, 'localhost', () => {
-//     console.log('Listening on http://localhost:4000');
-// })
-
-app.listen(80, () => {
-    console.log('CORS-enabled web server listening on port 80');
+app.listen(10000, () => {
+    console.log('Listening on port 10000');
 })
