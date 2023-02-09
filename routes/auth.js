@@ -18,15 +18,15 @@ authRouter
                 username: req.body.username.trim(),
                 email: req.body.email.trim(),
                 password: String(hash),
+                admin: req.body.admin,
+                profilePic: req.body.profilePic ?? ""
             })
 
             const newUser = await user.save();
             res.status(200).json(newUser);
-
         } catch (error) {
-            // rejestrować będzie tylko admin, dla przyśpieczenia zwróć co się powtarza
-            const err = error.keyValue?.username ?? error.keyValue?.email;
-            res.status(500).json('Powtarza się ' + err)
+            const message = error.keyValue?.username ? `Login ${error.keyValue?.username} jest już zajęty` : `W bazie istnieje już użytkownik zarejestrowany na adres ${error.keyValue?.email}`
+            res.status(500).json(message);
         }
     })
 
@@ -44,6 +44,7 @@ authRouter
             const token = jwt.sign({userID: user._doc._id.toString(), admin: user._doc.admin}, process.env.ACCESS_TOKEN, {
                 expiresIn: 60 * 60 * 7
             });
+
             return res.status(200).json({
                 "username": user._doc.username,
                 "profilePic": user._doc.profilePic,

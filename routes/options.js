@@ -1,10 +1,11 @@
 import express from "express";
 import {User} from "../models/User.js";
 
-const usersRouter = express.Router();
+const optionsRouter = express.Router();
 
-usersRouter
-    .get("/", async (req, res) => {
+optionsRouter
+    // getAllUsers
+    .get("/manage-users", async (req, res) => {
         try {
             const users = await User.find({});
             res.status(200).json(users)
@@ -12,7 +13,8 @@ usersRouter
             res.status(500).json(error);
         }
     })
-    .get("/:userId?", async (req, res) => {
+    // getSingleUser
+    .get("/manage-users/:userId", async (req, res) => {
         const {userId} = req.params;
         res.status(200);
         try {
@@ -22,5 +24,14 @@ usersRouter
             res.status(500).json(error);
         }
     })
+    // getAllProducts
+    .get("/manage-products", async (req, res) => {
+        res.send("/manage-products")
+    })
+    // getSingleProduct
+    .get("/manage-products/:productId", async (req, res) => {
+        res.send(`/manage-products/${req.params.productId}`)
+    })
 
-export default usersRouter;
+
+export default optionsRouter;

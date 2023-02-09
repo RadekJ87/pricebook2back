@@ -3,8 +3,8 @@ import * as dotenv from 'dotenv'
 import mongoose from 'mongoose';
 import authRouter from "./routes/auth.js";
 import productRouter from "./routes/products.js";
-import usersRouter from "./routes/users.js";
 import cors from 'cors'
+import optionsRouter from "./routes/options.js";
 
 const app = express();
 dotenv.config();
@@ -29,7 +29,7 @@ app
     })
     .use('/api/auth', authRouter)
     .use('/api/products', productRouter)
-    .use('/api/users', usersRouter);
+    .use('/api/options', optionsRouter);
 
 app.listen(10000, () => {
     console.log('Listening on port 10000');
